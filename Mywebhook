@@ -107,27 +107,23 @@ end
 local function rebhook()
 local OSTime = os.time();
 local Time = os.date('!*t', OSTime);
-local Avatar = 'https://cdn.discordapp.com/attachments/1250784927461539841/1254296492592599091/f9d06ec729da173f8e25535ea8f972d6.png?ex=6678fa23&is=6677a8a3&hm=84f4642a0a44bcf8eac26a0f428506a3b4ebe29131b727531deb19997b75b538&';
-
+local Avatar = 'https://cdn.discordapp.com/embed/avatars/4.png';
 local Content = '';
 local Embed = {
-    title = 'Conratulation';
-    color = '48299';
+    title = 'Conratulation Nickgas';
+    color = '99999';
     footer = { text = game.JobId };
-    author = { name = '';
-    };
-    
+    author = { name = '';};
     fields = {
         {
-            name = 'You Has Rebirthed To Dog Version';
-}
+            name = 'Has Rebirthed To Dog Version';
+            value = 'string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec';
+        }
+    };
+    timestamp = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec);
 };
-timestamp = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec);
-                 
-};
-
 (syn and syn.request or http_request) {
-    Url = rebhok;
+    Url = Yourwebhook;
     Method = 'POST';
     Headers = {
         ['Content-Type'] = 'application/json';
