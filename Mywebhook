@@ -104,7 +104,7 @@ function getCheckValue()
     return checkValue
 end
 
-local function rebhook()
+
 local function rebhook()
 local OSTime = os.time();
 local Time = os.date('!*t', OSTime);
@@ -121,11 +121,11 @@ local Embed = {
     fields = {
         {
             name = 'You Has Rebirthed';
-            value = 'string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec)';
+            value = '';
         }
     };
     
-    Timestamp = 'string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec);};
+    timestamp = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec);};
  
 
 (syn and syn.request or http_request) {
@@ -629,7 +629,7 @@ local FormsList = {
 local quests = {
     { name = "Klirin",
     nickname = "Klirin",
-    requiredValue = 0,
+    requiredValue = 100,
     endRange = 12500,
     planet = "Earth"
 }, {
