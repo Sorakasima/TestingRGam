@@ -590,75 +590,81 @@ local FormsList = {
 }
 
 local quests = {{
+    name = "X Fighter Trainer",
+    nickname = "X Fighter",
+    requiredValue = 0,
+    endRange = 10000,
+    planet = "Earth"
+}, {
     name = "Klirin",
     nickname = "Klirin",
-    requiredValue = 0,
-    endRange = 60000,
+    requiredValue = 10001,
+    endRange = 20000,
     planet = "Earth"
 }, {
     name = "Kid Nohag",
     nickname = "Kid Nohag",
-    requiredValue = 60001,
-    endRange = 100000,
+    requiredValue = 20001,
+    endRange = 50000,
     planet = "Earth"
 }, {
     name = "Radish",
     nickname = "Radish",
-    requiredValue = 100001,
-    endRange = 200000,
+    requiredValue = 50001,
+    endRange = 150000,
     planet = "Earth"
 }, {
     name = "Mapa",
     nickname = "Mapa",
-    requiredValue = 200001,
-    endRange = 400000,
+    requiredValue = 150001,
+    endRange = 200000,
     planet = "Earth"
 }, {
     name = "Top X Fighter",
     nickname = "X Fighter Master",
-    requiredValue = 400001,
-    endRange = 750000,
+    requiredValue = 200001,
+    endRange = 300000,
     planet = "Earth"
 }, {
     name = "Super Vegetable",
     nickname = "Super Vegetable",
-    requiredValue = 750001,
+    requiredValue = 300001,
     endRange = 1000000,
     planet = "Earth"
 }, {
     name = "Chilly",
     nickname = "Chilly",
-    requiredValue = 100001,
-    endRange = 1000000,
+    requiredValue = 1000001,
+    endRange = 2000000,
     planet = "Earth"
 }, {
     name = "Perfect Atom",
     nickname = "Perfect Atom",
-    requiredValue = 1000001,
-    endRange = 9100000,
+    requiredValue = 2000001,
+    endRange = 3000000,
     planet = "Earth"
 }, {
     name = "SSJ2 Wukong",
     nickname = "SSJ2 Wukong",
-    requiredValue = 9100001,
-    endRange = 10000000,
+    requiredValue = 3000001,
+    endRange = 4000000,
     planet = "Earth"
 }, {
     name = "SSJB Wukong",
     nickname = "SSJB Wukong",
-    requiredValue = 10000001,
-    endRange = 30500000,
+    requiredValue = 4000001,
+    endRange = 15000000,
     planet = "Earth"
 }, {
     name = "Broccoli",
     nickname = "Broccoli",
-    requiredValue = 30500001,
-    endRange = 70000000,
+    requiredValue = 15000001,
+    endRange = 65000000,
     planet = "Earth"
 }, {
     name = "SSJG Kakata",
     nickname = "SSJG Kakata",
-    requiredValue = 70000000,
+    requiredValue = 65000000,
     endRange = 120000000,
     planet = "Earth"
 }, {
@@ -671,48 +677,48 @@ local quests = {{
     name = "Wukong (Omen)",
     nickname = "Wukong (Omen)",
     requiredValue = 200000001,
-    endRange = 600000000,
+    endRange = 250000000,
     planet = "Bills"
 }, {
     name = "Vills (50%)",
     nickname = "Vills (50%)",
-    requiredValue = 600000001,
-    endRange = 250000000,
+    requiredValue = 250000000,
+    endRange = 600000000,
     planet = "Bills"
 }, {
     name = "Vis (20%)",
     nickname = "Vis (20%)",
-    requiredValue = 250000001,
+    requiredValue = 600000001,
     endRange = 1000000000,
     planet = "Bills"
 }, {
     name = "Vegetable (LBSSJ4)",
     nickname = "Vegetable (LBSSJ4)",
     requiredValue = 1000000001,
-    endRange = 2500000000,
+    endRange = 1500000000,
     planet = "Bills"
 }, {
     name = "Wukong (LBSSJ4)",
     nickname = "Wukong (LBSSJ4)",
-    requiredValue = 2500000001,
-    endRange = 3000000000,
+    requiredValue = 1500000001,
+    endRange = 2000000000,
     planet = "Bills"
 }, {
     name = "Vekuta (LBSSJ4)",
     nickname = "Vekuta (LBSSJ4)",
-    requiredValue = 3000000001,
-    endRange = 4000000000,
+    requiredValue = 2000000001,
+    endRange = 3000000000,
     planet = "Bills"
 }, {
     name = "Wukong Rose",
     nickname = "Wukong Rose",
-    requiredValue = 4000000001,
-    endRange = 4100000000,
+    requiredValue = 3000000001,
+    endRange = 3500000000,
     planet = "Bills"
 }, {
     name = "Vekuta (SSJBUI)",
     nickname = "Vekuta (SSJBUI)",
-    requiredValue = 4100000001,
+    requiredValue = 3500000001,
     endRange = 2000000000000000000,
     planet = "Bills"
 }}
@@ -1032,7 +1038,6 @@ local event = game:GetService("ReplicatedStorage").Package.Events.drain
 				return OldHook(self, ...)
 			end)
         end)
-game:GetService("Workspace").Others.BossMaps:Destroy()
 
 
 questneeded = true
@@ -1174,7 +1179,7 @@ check1()
 
                     if transformStatus == true and game.Workspace.Living[targetted].Stats.Ki.Value > 101 and
                         game:GetService("ReplicatedStorage").Datas[game.Players.LocalPlayer.UserId].Quest.Value ~=
-                        "Klirin" then
+                        "X Fighter Trainer" then
 
                         local value = getCheckValue()
                         local alignment = data.Allignment.Value
