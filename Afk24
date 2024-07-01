@@ -674,24 +674,24 @@ local quests = {{
     name = "Chilly",
     nickname = "Chilly",
     requiredValue = 2000001,
-    endRange = 3000000,
+    endRange = 400000,
     planet = "Earth"
 }, {
     name = "Perfect Atom",
     nickname = "Perfect Atom",
-    requiredValue = 3000001,
-    endRange = 4000000,
-    planet = "Earth"
-}, {
-    name = "SSJ2 Wukong",
-    nickname = "SSJ2 Wukong",
     requiredValue = 4000001,
     endRange = 5000000,
     planet = "Earth"
 }, {
+    name = "SSJ2 Wukong",
+    nickname = "SSJ2 Wukong",
+    requiredValue = 5000001,
+    endRange = 8000000,
+    planet = "Earth"
+}, {
     name = "SSJB Wukong",
     nickname = "SSJB Wukong",
-    requiredValue = 5000001,
+    requiredValue = 8000001,
     endRange = 20000000,
     planet = "Earth"
 }, {
