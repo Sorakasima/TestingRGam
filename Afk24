@@ -1,5 +1,5 @@
 
-local rebhok = "yourwebhook" 
+local rebhok = "https://discord.com/api/webhooks/1250784620618842183/2lgJmnT9Phg3MDEgmygbZ4tGOzb3ocMdtItVAyElqkFY077MxloMxwRtqg0EhgNZRAz2" 
     
 local loaded = false
  
