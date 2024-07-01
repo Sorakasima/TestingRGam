@@ -1,0 +1,1521 @@
+
+local rebhok = "yourwebhook" 
+    
+local loaded = false
+ 
+   success, err = pcall(function()
+       while not loaded do
+    if game["loaded"] then
+        
+        loaded = true
+        break
+    end
+    end
+   end)
+            if success then
+
+                warn(" game loaded Function executed successfully")
+
+             
+                
+            else
+                warn("Error occurred:", err)
+            
+            end
+
+print("game loaded")
+local success, result = pcall(function()
+    repeat
+        task.wait()
+    until game.Players.LocalPlayer ~= nil and game.Players.LocalPlayer.Name ~= nil and
+        game.Players.LocalPlayer:GetMouse() ~= nil
+
+    repeat
+        task.wait()
+    until game:IsLoaded()
+    game:WaitForChild("ReplicatedStorage")
+    game.ReplicatedStorage:WaitForChild("Datas")
+    game.ReplicatedStorage.Datas:WaitForChild(game.Players.LocalPlayer.UserId)
+end)
+if success then
+
+
+
+                warn(" game loaded Function executed successfully")
+
+                
+            else
+                warn("Error occurred:", err)
+            
+            end
+
+task.wait()
+
+
+local stackneeded = true
+local targetted;
+local transformStatus = false
+local autoFarmLoopRunning = false
+local stacked = false
+local flying = false
+
+local charge = false
+local checkValue;
+
+getgenv().dead = false
+getgenv().rebirthed = false
+
+function format_number(number)
+    local suffixes = {"", "K", "M", "B", "T", "QD"}
+    local suffix_index = 1
+
+    while math.abs(number) >= 1000 and suffix_index < #suffixes do
+        number = number / 1000.0
+        suffix_index = suffix_index + 1
+    end
+
+    return string.format("%.2f%s", number, suffixes[suffix_index])
+end
+
+
+function getCheckValue()
+    data = game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId]
+    local a = data.Strength.Value
+    local b = data.Energy.Value
+    local c = data.Defense.Value
+    local d = data.Speed.Value
+
+    local smallest = a 
+
+    if b < smallest then
+        smallest = b
+    end
+
+    if c < smallest then
+        smallest = c
+    end
+
+    if d < smallest then
+        smallest = d
+    end
+
+    checkValue = smallest
+    return checkValue
+end
+if game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId].Energy.Value <= 0 and game.placeId ~= 5151400895 then  --WEBHOOKK
+    local OSTime = os.time();
+    local Time = os.date('!*t', OSTime);
+    local dt = DateTime.now()
+    local Webhook_URL = rebhok
+
+    local Headers = {
+        ['Content-Type'] = 'application/json',
+    }
+
+    local data = {
+        ["embeds"] = {
+            {
+                ["title"] = "User:",
+                ["description"] = game.Players.LocalPlayer.Name .. "",
+                ["type"] = "rich",
+                ["color"] = tonumber(0x644CFF),
+                ["fields"] = {
+                    {
+                        ["name"] = "Rebirths:",
+                        ["value"] = game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId].Rebirth.Value .. '',
+                        ["inline"] = true,
+                    },
+                    {
+                        ["name"] = ":tada: Congratulations :tada:",
+                        ["value"] = 'Rebirthed At: ' ..dt:FormatLocalTime("hh", "en-us").. 'h' .. dt:FormatLocalTime("mm", "en-us") .. 'm' .. 
+                        dt:FormatLocalTime("mm", "en-us") .. 's',
+                        ["inline"] = true,
+                    },
+                },
+            },
+        },
+    }
+
+    local PlayerData = game:GetService('HttpService'):JSONEncode(data)
+
+    local Request = http_request or request or HttpPost or syn.request
+
+        Request({Url = Webhook_URL, Body = PlayerData, Method = "POST", Headers = Headers})
+    end
+local PaidFormsList = {
+    Evil = {{
+        name = "SSJ2 Kaioken",
+        reqvalue = 50000,
+        endrangevalue = 160000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6950449
+    }, {
+        name = "LSSJ Kaioken",
+        reqvalue = 160001,
+        endrangevalue = 250000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6950449
+    }, {
+        name = "Mystic Kaioken",
+        reqvalue = 250001,
+        endrangevalue = 550000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6950449
+    }, {
+        name = "SSJ5",
+        reqvalue = 550001,
+        endrangevalue = 800000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6950469
+    }, {
+        name = "LSSJ3",
+        reqvalue = 800001,
+        endrangevalue = 1000000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6951002
+    }, {
+        name = "SSJG4",
+        reqvalue = 1000001,
+        endrangevalue = 1800000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6950465
+    }, {
+        name = "LSSJ4",
+        reqvalue = 1800001,
+        endrangevalue = 3000000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6951002
+    }, {
+        name = "LSSJG",
+        reqvalue = 3000001,
+        endrangevalue = 4000000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6951002
+    }, {
+        name = "Super Broly",
+        reqvalue = 4000000,
+        endrangevalue = 30000000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 7837022
+    }, {
+        name = "True God of Destruction",
+        reqvalue = 30000001,
+        endrangevalue = 50000000,
+        alignment = "Evil",
+        rebirthReq = 10,
+        formOwned = false,
+        GamePassID = 9848987
+    }, {
+        name = "SSJB4",
+        reqvalue = 50000001,
+        endrangevalue = 100000000000000000000000,
+        alignment = "Neutral",
+        rebirthReq = 13,
+        formOwned = false,
+        GamePassID = 6950465
+    }, {
+        name = "Blanco",
+        reqvalue = 120000001,
+        endrangevalue = 100000000000000000000000,
+        alignment = "Neutral",
+        rebirthReq = 24,
+        formOwned = false,
+        GamePassID = 676684901
+    }},
+    Good = {{
+        name = "SSJ2 Kaioken",
+        reqvalue = 50000,
+        endrangevalue = 160000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6950449
+    }, {
+        name = "LSSJ Kaioken",
+        reqvalue = 160001,
+        endrangevalue = 250000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6950449
+    }, {
+        name = "Mystic Kaioken",
+        reqvalue = 250001,
+        endrangevalue = 550000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6950449
+    }, {
+        name = "SSJ5",
+        reqvalue = 550001,
+        endrangevalue = 800000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6950469
+    }, {
+        name = "LSSJ3",
+        reqvalue = 800001,
+        endrangevalue = 1000000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6951002
+    }, {
+        name = "SSJG4",
+        reqvalue = 1000001,
+        endrangevalue = 1800000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6950465
+    }, {
+        name = "LSSJ4",
+        reqvalue = 1800001,
+        endrangevalue = 3000000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6951002
+    }, {
+        name = "LSSJG",
+        reqvalue = 3000001,
+        endrangevalue = 4000000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 6951002
+    }, {
+        name = "Super Broly",
+        reqvalue = 4000000,
+        endrangevalue = 30000000,
+        alignment = "Neutral",
+        rebirthReq = 0,
+        formOwned = false,
+        GamePassID = 7837022
+    }, {
+        name = "True God of Creation",
+        reqvalue = 30000001,
+        endrangevalue = 50000000,
+        alignment = "Good",
+        rebirthReq = 10,
+        formOwned = false,
+        GamePassID = 9848987
+    }, {
+        name = "SSJB4",
+        reqvalue = 50000001,
+        endrangevalue = 120000000,
+        alignment = "Neutral",
+        rebirthReq = 13,
+        formOwned = false,
+        GamePassID = 6950465
+    }, {
+        name = "Blanco",
+        reqvalue = 120000001,
+        endrangevalue = 100000000000000000000000,
+        alignment = "Neutral",
+        rebirthReq = 24,
+        formOwned = false,
+        GamePassID = 676684901
+    }}
+}
+
+local FormsList = {
+
+    Evil = {{
+        name = "Kaioken",
+        reqvalue = 1000,
+        endrangevalue = 2500,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "FSSJ",
+        reqvalue = 2501,
+        endrangevalue = 6000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJ",
+        reqvalue = 6001,
+        endrangevalue = 16000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJ Kaioken",
+        reqvalue = 16001,
+        endrangevalue = 34000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJ2",
+        reqvalue = 34001,
+        endrangevalue = 65000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJ2 Majin",
+        reqvalue = 65001,
+        endrangevalue = 95000,
+        alignment = "Evil",
+        rebirthReq = 0
+    }, {
+        name = "SSJ3",
+        reqvalue = 95001,
+        endrangevalue = 140000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "LSSJ",
+        reqvalue = 140001,
+        endrangevalue = 200000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "Mystic",
+        reqvalue = 200001,
+        endrangevalue = 300000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJ4",
+        reqvalue = 300001,
+        endrangevalue = 450000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJG",
+        reqvalue = 450001,
+        endrangevalue = 700000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "Corrupt SSJ",
+        reqvalue = 700001,
+        endrangevalue = 1400000,
+        alignment = "Evil",
+        rebirthReq = 0
+    }, {
+        name = "SSJ Rose",
+        reqvalue = 1400001,
+        endrangevalue = 2400000,
+        alignment = "Evil",
+        rebirthReq = 0
+    }, {
+        name = "True Rose",
+        reqvalue = 2400001,
+        endrangevalue = 3000000,
+        alignment = "Evil",
+        rebirthReq = 0
+    }, {
+        name = "SSJ Berserker",
+        reqvalue = 3000001,
+        endrangevalue = 3500000,
+        alignment = "Evil",
+        rebirthReq = 1
+    }, {
+        name = "Dark Rose",
+        reqvalue = 3500001,
+        endrangevalue = 4000000,
+        alignment = "Evil",
+        rebirthReq = 2
+    }, {
+        name = "Evil SSJ",
+        reqvalue = 4000001,
+        endrangevalue = 5000000,
+        alignment = "Evil",
+        rebirthReq = 3
+    }, {
+        name = "Godly SSJ2",
+        reqvalue = 8000001,
+        endrangevalue = 14000000,
+        alignment = "Neutral",
+        rebirthReq = 4
+    }, {
+        name = "Jiren Ultra Instinct",
+        reqvalue = 14000001,
+        endrangevalue = 30000000,
+        alignment = "Evil",
+        rebirthReq = 6
+    }, {
+        name = "God of Destruction",
+        reqvalue = 30000001,
+        endrangevalue = 50000000,
+        alignment = "Evil",
+        rebirthReq = 10
+    }, {
+        name = "SSJR3",
+        reqvalue = 50000001,
+        endrangevalue = 100000000,
+        alignment = "Evil",
+        rebirthReq = 12
+    }, {
+        name = "LBSSJ4",
+        reqvalue = 100000001,
+        endrangevalue = 120000000,
+        alignment = "Good",
+        rebirthReq = 18
+    }, {
+        name = "Ultra Ego",
+        reqvalue = 120000001,
+        endrangevalue = 120000002,
+        alignment = "Evil",
+        rebirthReq = 20
+    }, {
+        name = "Beast",
+        reqvalue = 120000001,
+        endrangevalue = 12000000000000000000000000000000000,
+        alignment = "Neutral",
+        rebirthReq = 24
+    }}, -- close evil
+
+    Good = {{
+        name = "Kaioken",
+        reqvalue = 1000,
+        endrangevalue = 2500,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "FSSJ",
+        reqvalue = 2501,
+        endrangevalue = 6000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJ",
+        reqvalue = 6001,
+        endrangevalue = 16000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJ Kaioken",
+        reqvalue = 16001,
+        endrangevalue = 34000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJ2",
+        reqvalue = 34001,
+        endrangevalue = 65000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "Spirit SSJ",
+        reqvalue = 65001,
+        endrangevalue = 95000,
+        alignment = "Good",
+        rebirthReq = 0
+    }, {
+        name = "SSJ3",
+        reqvalue = 95001,
+        endrangevalue = 140000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "LSSJ",
+        reqvalue = 140001,
+        endrangevalue = 200000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "Mystic",
+        reqvalue = 200001,
+        endrangevalue = 300000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJ4",
+        reqvalue = 300001,
+        endrangevalue = 450000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJG",
+        reqvalue = 450001,
+        endrangevalue = 700000,
+        alignment = "Neutral",
+        rebirthReq = 0
+    }, {
+        name = "SSJ Rage",
+        reqvalue = 700001,
+        endrangevalue = 1200000,
+        alignment = "Good",
+        rebirthReq = 0
+    }, {
+        name = "SSJ Blue",
+        reqvalue = 1200001,
+        endrangevalue = 2200000,
+        alignment = "Good",
+        rebirthReq = 0
+    }, {
+        name = "SSJB Kaioken",
+        reqvalue = 2200001,
+        endrangevalue = 3000000,
+        alignment = "Good",
+        rebirthReq = 0
+    }, {
+        name = "Kefla SSJ2",
+        reqvalue = 3000001,
+        endrangevalue = 3500000,
+        alignment = "Good",
+        rebirthReq = 1
+    }, {
+        name = "Blue Evolution",
+        reqvalue = 3500001,
+        endrangevalue = 5000000,
+        alignment = "Good",
+        rebirthReq = 2
+    }, {
+        name = "Godly SSJ2",
+        reqvalue = 8000001,
+        endrangevalue = 14000000,
+        alignment = "Neutral",
+        rebirthReq = 4
+    }, {
+        name = "Mastered Ultra Instinct",
+        reqvalue = 14000001,
+        endrangevalue = 30000000,
+        alignment = "Good",
+        rebirthReq = 6
+    }, {
+        name = "God of Creation",
+        reqvalue = 30000001,
+        endrangevalue = 50000000,
+        alignment = "Good",
+        rebirthReq = 10
+    }, {
+        name = "SSJB3",
+        reqvalue = 50000001,
+        endrangevalue = 100000000,
+        alignment = "Good",
+        rebirthReq = 12
+    }, {
+        name = "LBSSJ4",
+        reqvalue = 100000001,
+        endrangevalue = 120000001,
+        alignment = "Good",
+        rebirthReq = 18
+    }, {
+        name = "SSJBUI",
+        reqvalue = 120000001,
+        endrangevalue = 120000002,
+        alignment = "Good",
+        rebirthReq = 20
+    }, {
+        name = "Beast",
+        reqvalue = 120000001,
+        endrangevalue = 12000000000000000000000000000000000,
+        alignment = "Neutral",
+        rebirthReq = 24
+    }}
+}
+
+local quests = {{
+    name = "X Fighter Trainer",
+    nickname = "X Fighter",
+    requiredValue = 0,
+    endRange = 20000,
+    planet = "Earth"
+}, {
+    name = "Klirin",
+    nickname = "Klirin",
+    requiredValue = 20001,
+    endRange = 30000,
+    planet = "Earth"
+}, {
+    name = "Kid Nohag",
+    nickname = "Kid Nohag",
+    requiredValue = 30001,
+    endRange = 90000,
+    planet = "Earth"
+}, {
+    name = "Radish",
+    nickname = "Radish",
+    requiredValue = 90001,
+    endRange = 200000,
+    planet = "Earth"
+}, {
+    name = "Mapa",
+    nickname = "Mapa",
+    requiredValue = 200001,
+    endRange = 400000,
+    planet = "Earth"
+}, {
+    name = "Top X Fighter",
+    nickname = "X Fighter Master",
+    requiredValue = 400001,
+    endRange = 600000,
+    planet = "Earth"
+}, {
+    name = "Super Vegetable",
+    nickname = "Super Vegetable",
+    requiredValue = 600001,
+    endRange = 2000000,
+    planet = "Earth"
+}, {
+    name = "Chilly",
+    nickname = "Chilly",
+    requiredValue = 2000001,
+    endRange = 3000000,
+    planet = "Earth"
+}, {
+    name = "Perfect Atom",
+    nickname = "Perfect Atom",
+    requiredValue = 3000001,
+    endRange = 4000000,
+    planet = "Earth"
+}, {
+    name = "SSJ2 Wukong",
+    nickname = "SSJ2 Wukong",
+    requiredValue = 4000001,
+    endRange = 5000000,
+    planet = "Earth"
+}, {
+    name = "SSJB Wukong",
+    nickname = "SSJB Wukong",
+    requiredValue = 5000001,
+    endRange = 20000000,
+    planet = "Earth"
+}, {
+    name = "Broccoli",
+    nickname = "Broccoli",
+    requiredValue = 20000001,
+    endRange = 70000000,
+    planet = "Earth"
+}, {
+    name = "SSJG Kakata",
+    nickname = "SSJG Kakata",
+    requiredValue = 70000001,
+    endRange = 120000000,
+    planet = "Earth"
+}, {
+    name = "Vegetable (GoD in-training)",
+    nickname = "Vegetable (GoD in-training)",
+    requiredValue = 120000001,
+    endRange = 200000000,
+    planet = "Bills"
+}, {
+    name = "Wukong (Omen)",
+    nickname = "Wukong (Omen)",
+    requiredValue = 200000001,
+    endRange = 250000000,
+    planet = "Bills"
+}, {
+    name = "Vills (50%)",
+    nickname = "Vills (50%)",
+    requiredValue = 250000001,
+    endRange = 600000000,
+    planet = "Bills"
+}, {
+    name = "Vis (20%)",
+    nickname = "Vis (20%)",
+    requiredValue = 600000001,
+    endRange = 1500000000,
+    planet = "Bills"
+}, {
+    name = "Vegetable (LBSSJ4)",
+    nickname = "Vegetable (LBSSJ4)",
+    requiredValue = 1500000001,
+    endRange = 2000000000,
+    planet = "Bills"
+}, {
+    name = "Wukong (LBSSJ4)",
+    nickname = "Wukong (LBSSJ4)",
+    requiredValue = 2000000001,
+    endRange = 2500000000,
+    planet = "Bills"
+}, {
+    name = "Vekuta (LBSSJ4)",
+    nickname = "Vekuta (LBSSJ4)",
+    requiredValue = 2500000001,
+    endRange = 3500000000,
+    planet = "Bills"
+}, {
+    name = "Wukong Rose",
+    nickname = "Wukong Rose",
+    requiredValue = 3500000001,
+    endRange = 4000000000,
+    planet = "Bills"
+}, {
+    name = "Vekuta (SSJBUI)",
+    nickname = "Vekuta (SSJBUI)",
+    requiredValue = 4000000001,
+    endRange = 2000000000000000000,
+    planet = "Bills"
+}}
+
+
+
+local function check1()
+    pcall(function()
+    local checkValue = getCheckValue()
+
+    if checkValue >= 120000000 and game.placeId ~= 5151400895 then
+        data = game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId]
+        if data.Zeni.Value >= 15000 then
+
+            local A_1 = "Vills Planet"
+            local Event = game:GetService("ReplicatedStorage").Package.Events.TP
+            Event:InvokeServer(A_1)
+            tp = true
+            return tp
+        else
+            SelectedQuests = "SSJG Kakata"
+            SelectedMobs1 = "SSJG Kakata"
+
+            tp = false
+            return SelectedQuests, SelectedMobs, tp
+
+        end
+    end
+
+    if checkValue <= 120000000 and game.placeId == 5151400895 then
+
+        if checkValue < 120000000 and game.placeId ~= 3311165597 then
+            local A_1 = "Earth"
+            local Event = game:GetService("ReplicatedStorage").Package.Events.TP
+            Event:InvokeServer(A_1)
+            task.wait(8)
+        end
+    end
+end)
+end
+
+function target()
+    targetted = game.Players.LocalPlayer.name
+
+end
+pcall(function() target() end)
+local function deadcheck(LDCheck)
+    success, err = pcall(function()
+        task.wait()
+        if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
+            getgenv().dead = true
+            transformStatus = false
+            autoFarmLoopRunning = false
+            flying = false
+            questneeded = true
+            
+
+        else
+            autoFarmLoopRunning = true
+            getgenv().dead = false
+            
+        end
+    end)
+    if LDCheck then
+        getgenv().stackneeded = false
+        autoFarmLoopRunning = true
+        print("last dead check passed")
+    end
+    if success then
+        warn("Stack loop Function executed successfully with a value of " .. tostring(getgenv().dead))
+      
+        
+    else
+        warn("Error occurred:", err)
+        
+    end
+    return autoFarmLoopRunning, transformStatus, flying
+end
+
+function startgame()
+    pcall(function()
+
+        repeat
+
+            if game.workspace[targetted] then
+                task.wait()
+                local Event = game:GetService("ReplicatedStorage").Package.Events.Start
+                Event:InvokeServer()
+                task.wait()
+
+                local Event = game:GetService("ReplicatedStorage").Package.Events.Start
+                Event:InvokeServer()
+
+                task.wait()
+
+                game.Players.LocalPlayer.PlayerGui.Main.bruh.Disabled = true
+
+                game.Players.LocalPlayer.PlayerGui.Main.bruh.Disabled = false
+
+                task.wait()
+                local Event = game:GetService("ReplicatedStorage").Package.Events.Start
+                Event:InvokeServer()
+
+            end
+        until game.workspace.Living[targetted]
+
+    end)
+
+end
+repeat
+ success, err = pcall(function() 
+local function CheckGamePass(UserId, GamePassID)
+    local MarketplaceService = game:GetService("MarketplaceService")
+    return MarketplaceService:UserOwnsGamePassAsync(UserId, GamePassID)
+end
+
+local userId = game.Players.LocalPlayer.UserId 
+
+for _, form in ipairs(PaidFormsList["Evil"]) do
+
+    form.formOwned = CheckGamePass(userId, form.GamePassID)
+
+end
+
+for _, form in ipairs(PaidFormsList["Good"]) do
+    form.formOwned = CheckGamePass(userId, form.GamePassID)
+end
+
+for _, form in ipairs(PaidFormsList["Good"]) do
+
+    print(string.format("Name: %s, ReqValue: %d, EndRangeValue: %d, Alignment: %s, RebirthReq: %d, FormOwned: %s",
+        form.name, form.reqvalue, form.endrangevalue, form.alignment, form.rebirthReq, tostring(form.formOwned)))
+
+end
+end)
+task.wait()
+until success
+
+local function autostack(stack1)
+    pcall(function()
+        targetted = game.Players.LocalPlayer.name
+        data = game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId]
+        if stack1 == true and data.Energy.Value > 8000000 and getgenv().dead == false then
+            task.wait(1)
+
+            game.workspace.Living[targetted].UpperTorso:Destroy()
+            task.wait(5)
+            local Remote = game.ReplicatedStorage.Package.Events['equipskill']
+            local Arguments = {
+                [1] = "Godly SSJ2"
+            }
+            Remote:InvokeServer(unpack(Arguments))
+            local Remote = game.ReplicatedStorage.Package.Events['ta']
+            i = 0
+            repeat
+                Remote:InvokeServer(unpack(Arguments))
+                i = i + 1
+                task.wait(.1)
+            until i == 8
+            task.wait()
+            getgenv().stackneeded = false
+            transformStatus = true
+            autoFarmLoopRunning = true
+            flying = false
+            return transformStatus, autoFarmLoopRunning, flying
+        elseif stack1 == false then
+            getgenv().stackneeded = false
+            transformStatus = true
+            autoFarmLoopRunning = true
+            flying = false
+            return  transformStatus, autoFarmLoopRunning, flying
+        elseif stack1 == true and data.Energy.Value < 8000000 then
+            task.wait()
+            getgenv().stackneeded = false
+            transformStatus = true
+            autoFarmLoopRunning = true
+            flying = false
+            return  transformStatus, autoFarmLoopRunning, flying
+        end
+    end)
+end
+
+pcall(function()
+    task.wait()
+    check1()
+
+    repeat
+
+        startgame()
+
+    until game.workspace.Living[targetted]
+
+end)
+task.spawn(function()
+pcall(function()
+    local bb = game:service 'VirtualUser'
+    game:service 'Players'.LocalPlayer.Idled:connect(function()
+        bb:CaptureController()
+        bb:ClickButton2(Vector2.new())
+        task.wait(2)
+
+    end)
+end)
+end)
+sameplanet = true
+SelectedQuests = ""
+SelectedMobs = ""
+local planet1 = ""
+
+local function getQuest(switch1)
+    switch1 = getgenv().switch1
+
+    local checkValue = getCheckValue()
+
+    local previousQuestName -- Variable to keep track of the previous quest's name for switch == 1
+
+    for i, quest in ipairs(quests) do
+        if checkValue >= quest.requiredValue and checkValue <= quest.endRange then
+            currentQuestIndex = i
+
+            if switch1 == 1 then
+
+                SelectedQuests = quest.name
+                SelectedMobs = quest.nickname
+                planet1 = quest.planet
+
+                return SelectedQuests, SelectedMobs, planet1 -- exit the loop if a quest is found
+            elseif switch1 == 2 then
+                if currentQuestIndex >= 2 then
+
+                    for j = i - 1, 1, -1 do -- search for the previous quest
+                        local prevQuest = quests[j]
+
+                        if planet1 == prevQuest.planet then
+
+                            SelectedQuests = prevQuest.name
+                            SelectedMobs = prevQuest.nickname
+                            sameplanet = true
+
+                            return SelectedQuests, SelectedMobs, sameplanet -- exit the loop once the previous quest is found
+                        else
+                            sameplanet = false
+
+                            SelectedQuests = quest.name
+                            SelectedMobs = quest.nickname
+                            return SelectedQuests, SelectedMobs, switch1, sameplanet
+                        end
+                    end
+
+                elseif currentQuestIndex <= 1 then
+                    SelectedQuests = quest.name
+                    SelectedMobs = quest.nickname
+
+                    return SelectedQuests, SelectedMobs, switch1
+                end
+                break -- exit the loop if a quest is found (could also remove this line if the loop should continue searching for quests)
+            end
+
+        end
+    end
+
+end
+questneeded = false
+-- Function
+local attacks2 = {"High Power Rush", "God Slicer", "Spirit Barrage", 
+"Mach Kick", "Meteor Crash", "Wolf Fang Fist", "Super Dragon Fist"}
+
+-- Function
+local attacks = { "Vital Strike", "Uppercut",
+                 "Spirit Breaking Cannon", "Vanish Strike"
+                }
+
+local RebValue = ""
+
+local rebirthOnJoin = game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId].Rebirth.Value
+
+
+task.spawn(function()
+    while true and task.wait() do
+        pcall(function()
+            data = game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId]
+            while true and task.wait() do
+                task.wait()
+                game:GetService("ReplicatedStorage").Package.Events.reb:InvokeServer() -- reb
+                RebValue = data.Rebirth.Value
+                if rebirthOnJoin ~= RebValue then
+                   
+
+                    local A_1 = "Earth"
+                    local Event = game:GetService("ReplicatedStorage").Package.Events.TP
+
+                    Event:InvokeServer(A_1)
+
+                    task.wait()
+                end
+            end
+        end)
+    end
+end)
+
+--[[task.spawn(function()
+    while true and task.wait() do
+        pcall(function()
+
+            game.Players.LocalPlayer.Status.Blocking.Value = true
+        end)
+    end
+end)]]
+pcall(function()
+local event = game:GetService("ReplicatedStorage").Package.Events.drain
+			local OldHook, hookmetamethod, getnamecallmethod = nil, hookmetamethod, getnamecallmethod
+			OldHook = hookmetamethod(game, "__namecall", function(self, ...)
+				local Got  = getnamecallmethod():lower()
+				if self == event and Got:lower() == "fireserver" then
+					return
+				end
+				return OldHook(self, ...)
+			end)
+        end)
+        
+        
+
+questneeded = true
+SelectedMobs1 = ""
+getgenv().autostackloop = true
+getgenv().stackneeded = true
+-- main loop
+
+while true do
+    warn("in main loop")
+    success1, err1 = pcall(function()
+        task.wait()
+        deadcheck(false)
+        if getgenv().stackneeded == true then
+            deadcheck(false)
+            repeat
+                task.wait()
+                deadcheck(false)
+            until getgenv().dead == false
+            if getgenv().stackneeded == true then
+
+                stack1 = true
+                --autostack(stack1)
+                repeat
+                    success, err = pcall(function()
+                        targetted = game.Players.LocalPlayer.name
+                        data = game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId]
+                        if stack1 == true and data.Energy.Value > 8000000 and getgenv().dead == false then
+                            task.wait(1)
+                
+                            game.workspace.Living[targetted].UpperTorso:Destroy()
+                            task.wait(5)
+                            local Remote = game.ReplicatedStorage.Package.Events['equipskill']
+                            local Arguments = {
+                                [1] = "Godly SSJ2"
+                            }
+                            Remote:InvokeServer(unpack(Arguments))
+                            local Remote = game.ReplicatedStorage.Package.Events['ta']
+                            i = 0
+                            repeat
+                                Remote:InvokeServer(unpack(Arguments))
+                                i = i + 1
+                                task.wait(.1)
+                            until i == 8
+                            task.wait()
+                            getgenv().stackneeded = false
+                            transformStatus = true
+                            autoFarmLoopRunning = true
+                            flying = false
+                            
+                        elseif stack1 == false then
+                            getgenv().stackneeded = false
+                            transformStatus = true
+                            autoFarmLoopRunning = true
+                            flying = false
+                            
+                        elseif stack1 == true and data.Energy.Value < 8000000 then
+                            task.wait()
+                            getgenv().stackneeded = false
+                            transformStatus = true
+                            autoFarmLoopRunning = true
+                            flying = false
+                            
+                        end
+                    end)
+                    if success then
+                        warn("(1)Stack loop Function executed successfully with a value of " .. tostring(getgenv().stackneeded))
+                        -- Access the result returned by the function
+                        getgenv().stackneeded = false
+                    else
+                        warn("Error occurred:", err)
+                        
+                    end
+                    task.wait()
+                until getgenv().stackneeded == false
+                deadcheck(true)
+                getgenv().stackneeded = false
+                questneeded = true
+                autoFarmLoopRunning = true
+            end
+            
+        end
+        autoFarmLoopRunning = true
+        getgenv().stackneeded = false
+    end)
+    getgenv().stackneeded = false
+    if success1 then
+        warn("(2)Stack loop Function executed successfully with a value of " .. tostring(getgenv().stackneeded))
+        -- Access the result returned by the function
+        
+    else
+        warn("Error occurred:", err1)
+        
+    end
+
+warn("line 1100 quest status = " .. tostring(questneeded))
+warn("line 1100 enter loop status status = " .. tostring(autoFarmLoopRunning))
+    checkstackreq = getCheckValue()
+    if checkstackreq < 8000000 then
+        autoFarmLoopRunning = true
+    end
+
+    if getgenv().rebirthed == true and game.placeId == 5151400895 then
+        task.wait(10)
+check1()
+        return
+
+    elseif getgenv().rebirthed == true and game.placeId ~= 5151400895 then
+        task.wait(3)
+check1()
+    end
+
+    pcall(function()
+
+        game.Workspace.Living:WaitForChild(targetted)
+        game.Workspace.Living[targetted]:WaitForChild("HumanoidRootPart")
+
+    end)
+
+    if charge == false and getgenv().dead == false and autoFarmLoopRunning == true then
+
+        task.spawn(function()
+            while autoFarmLoopRunning do
+                pcall(function()
+                local args = {
+                    [1] = "Blacknwhite27"
+                }
+
+                game:GetService("ReplicatedStorage").Package.Events.cha:InvokeServer(unpack(args))
+                task.wait()
+            end)
+            end
+        end)
+        task.spawn(function()
+            while autoFarmLoopRunning do
+                pcall(function()
+                    data = game.ReplicatedStorage.Datas[game.Players.LocalPlayer.UserId]
+                    local formtouse;
+
+                    if transformStatus == true and game.Workspace.Living[targetted].Stats.Ki.Value > 101 and
+                        game:GetService("ReplicatedStorage").Datas[game.Players.LocalPlayer.UserId].Quest.Value ~=
+                        "X Fighter Trainer" then
+
+                        local value = getCheckValue()
+                        local alignment = data.Allignment.Value
+                        local forms = FormsList[alignment]
+                        local Paidforms = PaidFormsList[alignment]
+
+                        local matchFound = false 
+                        local paidmatchFound = false
+
+                        for _, form in ipairs(Paidforms) do
+                            if value >= form.reqvalue and value <= form.endrangevalue and form.reqvalue >=
+                                data.Rebirth.Value and form.formOwned == true then
+
+                                formtouse = form.name
+                                paidmatchFound = true 
+                                break 
+                            end
+
+                        end
+
+                        if paidmatchFound == false then
+                            for _, form in ipairs(forms) do
+                                if value >= form.reqvalue and value <= form.endrangevalue and form.reqvalue >=
+                                    data.Rebirth.Value then
+                                    formtouse = form.name
+                                    matchFound = true 
+
+                                    break 
+                                end
+                            end
+                        end
+
+                        if not matchFound and not paidmatchFound then
+                            for _, form in ipairs(forms) do
+                                if form.rebirthReq >= data.Rebirth.Value then
+                                    formtouse = form.name
+                                    break
+                                end
+                            end
+
+                        end
+                        equipRemote = game:GetService("ReplicatedStorage").Package.Events.equipskill
+                        equipRemote:InvokeServer(formtouse)
+                        repeat
+                            task.wait()
+                            if game.Players.LocalPlayer.Status.SelectedTransformation.Value ~=
+                                game.Players.LocalPlayer.Status.Transformation.Value then
+                                game:GetService("ReplicatedStorage").Package.Events.ta:InvokeServer()
+                            end
+                        until game.Players.LocalPlayer.Status.SelectedTransformation.Value ==
+                            game.Players.LocalPlayer.Status.Transformation.Value or
+                            game.Workspace.Living[targetted].Stats.Ki.Value < 101
+                    end
+
+                end)
+                task.wait(.5)
+            end
+        end)
+        charge = true
+    end
+
+    --[[if flying == false and getgenv().dead == false and autoFarmLoopRunning == true then
+        success, err = pcall(function()
+
+            game.Workspace.Living:WaitForChild(targetted)
+            game.Workspace.Living[targetted]:WaitForChild("HumanoidRootPart")
+            local bv = game.Workspace.Living[targetted].HumanoidRootPart:WaitForChild("BodyVelocity")
+            local bg = game.Workspace.Living[targetted].HumanoidRootPart:WaitForChild("BodyGyro")
+            
+
+            bg.P = 1
+            bg.MaxTorque = Vector3.new(500000, 500000, 500000)
+            bv.P = 1
+            bv.MaxForce = Vector3.new(100000, 100000, 100000)
+            flying = true
+        end)
+        if success then
+            warn("Fly Function executed successfully")
+            -- Access the result returned by the function
+            
+        else
+            warn("Error occurred:", err)
+            
+        end
+    end]]
+
+    if getgenv().dead == false and autoFarmLoopRunning == true then
+       warn("entered if for auto farm loop")
+        task.wait()
+
+        
+             success, err = pcall(function()
+                while autoFarmLoopRunning do
+                    task.wait()
+                    check1()
+                    local SelectedQuests, SelectedMobs, sameplanet;
+                     success1, err1 = pcall(function()
+
+                        while autoFarmLoopRunning do
+                            if breakagain == true then
+                                breakagain = false
+                                break
+                            end
+                            if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                                for i, v in ipairs(game:GetService("Workspace").Living:GetChildren()) do
+                                    task.wait()
+                                    local q;
+                                    getgenv().switch1 = 1
+                                    q = getgenv().switch1
+                                    SelectedQuests, SelectedMobs, sameplanet = getQuest(q)
+
+                                    if v.Name:lower() == SelectedMobs:lower() then
+
+                                        local humanoid = v.Humanoid
+
+                                        if humanoid then
+                                            local currentState = humanoid:GetState()
+
+                                            if currentState == Enum.HumanoidStateType.Dead then
+                                                getgenv().switch1 = 2
+                                                q = getgenv().switch1
+                                                SelectedQuests, SelectedMobs, sameplanet = getQuest(q)
+
+                                            end
+                                        end
+                                        break
+                                    end
+                                end
+                            end
+
+                            if string.len(game:GetService("ReplicatedStorage").Datas[game.Players.LocalPlayer.UserId]
+                                              .Quest.Value) <= 0 or questneeded == true then
+                                
+                                SelectedMobs1 = SelectedMobs
+
+                                checkValue = getCheckValue()
+                                if checkValue >= 120000000 and game.placeId ~= 5151400895 then
+                                    SelectedQuests, SelectedMobs1 = "SSJG Kakata", "SSJG Kakata"
+                                    local A_1 = "Vills Planet"
+                                    local Event = game:GetService("ReplicatedStorage").Package.Events.TP
+                                    Event:InvokeServer(A_1)
+                                end
+
+                                if game:GetService("ReplicatedStorage").Datas[game.Players.LocalPlayer.UserId].Quest
+                                    .Value ~= SelectedQuests then 
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService(
+                                                                                                     "Workspace").Others
+                                                                                                     .NPCs[SelectedQuests]
+                                                                                                     .HumanoidRootPart
+                                                                                                     .CFrame
+                                    repeat
+                                        task.wait()
+
+                                        game.ReplicatedStorage.Package.Events.Qaction:InvokeServer(game:GetService(
+                                                                                                       "Workspace").Others
+                                                                                                       .NPCs[SelectedQuests])
+                                    until game:GetService("ReplicatedStorage").Datas[game.Players.LocalPlayer.UserId]
+                                        .Quest.Value == SelectedQuests or
+                                        game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+                                end -- undefine
+                                
+                            end
+
+                            if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                                for i, v in ipairs(game:GetService("Workspace").Living:GetChildren()) do
+                                    task.wait()
+
+                                    if v.Name:lower() == SelectedMobs1:lower() and game.Players.LocalPlayer.Character and
+                                        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and
+                                        v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 or v.Name:lower() == "ssjg kakata" and SelectedMobs1:lower() == "ssjg kakata" then
+                                        task.wait()
+                                        if v.Name:lower() == "ssjg kakata" then
+                                            repeat
+                                                pcall(function()
+                                                    if v.Humanoid.Health > 0 then
+                                                        ssjgalive = true
+                                                    end
+                                                    end)
+                                            wait()
+                                            until ssjgalive == true
+end
+                                        
+                                        questneeded = false
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart
+                                                                                                         .CFrame +
+                                                                                                         Vector3.new(0,
+                                                0, 0)
+                                        
+
+                                        local Echar = v
+                                        task.spawn(function()
+                                            repeat
+
+                                                local myChar = game.Players.LocalPlayer.Character
+                                                
+                                                myChar.HumanoidRootPart.CFrame =
+                                                    Echar:GetPrimaryPartCFrame() * CFrame.new(0, 0, 2.5)
+                                                    
+myChar.HumanoidRootPart.CFrame = CFrame.lookAt(myChar.HumanoidRootPart.Position, Echar.HumanoidRootPart.Position)
+                                                task.wait()
+                                            until not autoFarmLoopRunning or v.Humanoid.Health <= 0 or
+                                                game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+                                        end)
+
+                                        task.wait(0.2)
+                                        local alignment = data.Allignment.Value
+                                        if alignment == "Evil" then
+                                            puntype = "Soul Punisher"
+                                        else
+                                            puntype = "Destruction"
+
+                                        end
+                                        repeat
+                                            task.wait()
+                                            
+                                                    if game.Workspace.Living[targetted].Stats.Ki.Value >= 10 then
+													repeat
+                                                             A_3 = "Blacknwhite27"                                                 																											
+															for _, A_1 in ipairs(attacks2) do
+																task.spawn(function()
+																	task.wait()
+																	game:GetService("ReplicatedStorage").Package.Events.mel:InvokeServer(
+																		A_1, A_3)
+															A_4 = "Energy Volley"
+                                                            A_2 = {
+                                                                ["FaceMouse"] = false,
+                                                                ["MouseHit"] = v.HumanoidRootPart.CFrame
+                                                            }
+                                                            
+                                                            Event =
+                                                                game:GetService("ReplicatedStorage").Package.Events
+                                                                    .voleys
+                                                            Event:InvokeServer(A_4, A_2, A_3)
+																	end)
+
+															
+															end
+                                                        task.wait()
+                                                    
+
+                                                        game:GetService("ReplicatedStorage").Package.Events.p:FireServer(
+                                                            "Blacknwhite27", 1)
+
+                                                  
+                                                until not autoFarmLoopRunning or v.Humanoid.Health <= 0 or
+                                                    game.Players.LocalPlayer.Character.Humanoid.Health <= 0 or
+                                                    game.Workspace.Living[targetted].Stats.Ki.Value < 10
+                                                    
+
+                                            end
+                                            task.wait()
+                                        until not autoFarmLoopRunning or v.Humanoid.Health <= 0 or
+                                            game.Players.LocalPlayer.Character.Humanoid.Health <= 0 or
+                                             game.Workspace.Living[targetted].Stats.Ki.Value < 1
+											
+                                        if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
+                                            getgenv().stackneeded = true
+                                            getgenv().dead = true
+                                            autoFarmLoopRunning = false
+                                            flying = false
+                                            charge = false
+                                            questneeded = true
+
+                                        end
+                                        breakagain = true
+                                        break
+                                    end
+
+                                end
+                            else
+                                questneeded = true
+                            end
+                            task.wait()
+                        end
+                    end)
+                    if success1 then
+                        warn("Function executed successfully")
+                       
+                        
+                    else
+                        warn("Error occurred:", err1)
+                        questneeded = true
+                    end
+                end
+            
+            end)
+            if success then
+                warn("Function executed successfully")
+                
+                
+            else
+                warn("Error occurred:", err)
+                questneeded = true
+            end
+            task.wait()
+        
+        
+    end
+end
